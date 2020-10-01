@@ -20,7 +20,15 @@ package edu.eci.cvds.samples.services.client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.cvds.samples.entities.Item;
+import edu.eci.cvds.samples.entities.TipoItem;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -61,13 +69,24 @@ public class MyBatisExample {
         SqlSessionFactory sessionfact = getSqlSessionFactory();
 
         SqlSession sqlss = sessionfact.openSession();
-
-        
-        //Crear el mapper y usarlo: 
-        //ClienteMapper cm=sqlss.getMapper(ClienteMapper.class)
-        //cm...
-        
-        
+		
+        ClienteMapper cm= sqlss.getMapper(ClienteMapper.class);
+        System.out.println(cm.consultarClientes());
+        System.out.println("----------------------------");
+        System.out.println(cm.consultarCliente(5));
+        System.out.println("----------------------------");
+        Date fechaI = new Date(98,4,5);
+        Date fechaF= new Date(100,5,5);
+        cm.agregarItemRentadoACliente(5,2, fechaI, fechaF);
+        System.out.println(cm.consultarCliente(5));
+        System.out.println("----------------------------");
+        ItemMapper im=sqlss.getMapper(ItemMapper.class);
+        //TipoItem tip = new TipoItem(2, "Accion");
+        //Date fecha = new Date(109,6,6);
+        System.out.println(im.consultarItem(7));
+        //System.out.println(im.consultarItems());
+        System.out.println("----------------------------");
+        //System.out.println(im.consultarItem(66));
         
         sqlss.commit();
         
