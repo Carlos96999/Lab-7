@@ -83,7 +83,7 @@ public class MyBatisExample {
         ItemMapper im=sqlss.getMapper(ItemMapper.class);
         //TipoItem tip = new TipoItem(2, "Accion");
         //Date fecha = new Date(109,6,6);
-        //System.out.println(im.consultarItem(7));
+        System.out.println(im.consultarItem(7));
         //System.out.println(im.consultarItems());
         //System.out.println("----------------------------");
         //System.out.println(im.consultarItem(66));
